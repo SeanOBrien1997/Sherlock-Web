@@ -1,0 +1,17 @@
+{
+  "name": "myserver",
+  "version": "1.0.0",
+  "description": "Express server to handle sherlock-app requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean O Brien",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
