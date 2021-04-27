@@ -9,6 +9,7 @@
   "author": "Sean O Brien",
   "license": "MIT",
   "dependencies": {
+    "eol": "^0.9.1",
     "express": "^4.17.1"
   },
   "devDependencies": {
