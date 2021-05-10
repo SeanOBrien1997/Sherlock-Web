@@ -6,12 +6,13 @@ const eol = require('eol');
 const app = express();
 const PYTHON_COMMAND = 'python3';
 const SHERLOCK_PATH = 'sherlock/sherlock/sherlock.py';
-const port = 3000;
+const port = 9090;
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-	const username = req.query.username;
+app.route('/user/:name').get((req, res) => {
+	const username = req.params.name;
+
 	if (username === undefined) {
 		res.send('Username undefined');
 		return;
@@ -55,6 +56,10 @@ app.get('/', (req, res) => {
 			}
 		});
 	});
+});
+
+app.get('/', (req, res) => {
+	res.sendStatus(404);
 });
 
 app.listen(port, () => {
