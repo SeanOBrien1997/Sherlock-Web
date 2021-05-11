@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import TableRow from './TableRow';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
 	const [formValue, setFormValue] = useState('');
+	const [userData, setUserData] = useState('');
+	const [tableStyle, setTableStyle] = useState('hidden');
 	const searchUser = async (e) => {
 		e.preventDefault();
 		console.log(`Fetching ${formValue}`);
@@ -15,7 +18,7 @@ function App() {
 		})
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result);
+				setUserData(result);
 			});
 	};
 
@@ -47,6 +50,27 @@ function App() {
 							Search
 						</button>
 					</form>
+				</div>
+				<div className="table-bar">
+					<div className={tableStyle}>
+						<p className="msg">
+							A total of {userData.count} site(s) were found.
+						</p>
+					</div>
+					<table className={tableStyle} id="data-table">
+						<thead>
+							<tr>
+								<th>Site name</th>
+								<th>Link</th>
+							</tr>
+						</thead>
+						<tbody>
+							{userData.sites &&
+								Object.entries(userData.sites).map((site) => (
+									<TableRow key={site.key} message={site} />
+								))}
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
