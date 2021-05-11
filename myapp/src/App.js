@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import TableRow from './TableRow';
 import logo from './logo.svg';
+import preloader from './283.gif';
 import './App.css';
 
 function App() {
 	const [formValue, setFormValue] = useState('');
 	const [userData, setUserData] = useState('');
-	const [tableStyle, setTableStyle] = useState('hidden');
+	const [tableStyle, setTableStyle] = useState('Hidden');
+	const [preloaderStyle, setPreloaderStyle] = useState('Hidden');
+
 	const searchUser = async (e) => {
 		e.preventDefault();
 		console.log(`Fetching ${formValue}`);
+		setPreloaderStyle('');
 		fetch(`/user/${formValue}`, {
 			headers: {
 				'Content-Type': 'application/json',
@@ -19,6 +23,8 @@ function App() {
 			.then((response) => response.json())
 			.then((result) => {
 				setUserData(result);
+				setPreloaderStyle('Hidden');
+				setTableStyle('Viewable');
 			});
 	};
 
@@ -52,6 +58,9 @@ function App() {
 					</form>
 				</div>
 				<div className="table-bar">
+					<div className={preloaderStyle}>
+						<img src={preloader} alt="preloader spinner" />
+					</div>
 					<div className={tableStyle}>
 						<p className="msg">
 							A total of {userData.count} site(s) were found.
