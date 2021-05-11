@@ -67,7 +67,7 @@ function App() {
 						<tbody>
 							{userData.sites &&
 								Object.entries(userData.sites).map((site) => (
-									<TableRow key={site.key} message={site} />
+									<TableRow key={site[0]} message={site} />
 								))}
 						</tbody>
 					</table>
